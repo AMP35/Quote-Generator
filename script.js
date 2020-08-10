@@ -4,7 +4,7 @@ const authorText = document.getElementById('author')
 const twitterBtn = document.getElementById('twitter')
 const newQuoteBtn = document.getElementById('new-quote')
 const loader = document.getElementById('loader');
-
+let failCounter = 0;
 //Show Loading
 function loading() {
     loader.hidden = false;
@@ -46,8 +46,12 @@ async function getQuote() {
         complete();
     } 
     catch (error) {
-        console.log('fuck');
-        // getQuote();
+        if (failCounter !== 10)
+        {
+            failCounter++;
+            console.log('fuck');
+            getQuote();
+        }
     }
 }
 
